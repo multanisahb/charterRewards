@@ -1,6 +1,14 @@
 # Charter Rewards
 Displays reward information for charter customers.
 
+# Endpoints Suppoerted
+```
+ GET http://localhost:8080/charter/rewards/customer/{{customerId}}
+```
+- Example
+```
+ GET http://localhost:8080/charter/rewards/customer/1
+```
 # Steps To Run locally
 ## Step 1: Setup Postgres
 ```
@@ -20,3 +28,5 @@ Displays reward information for charter customers.
 ./tearDownDatabase.sh
 ```
 - Repeat steps 1 - 3
+
+
