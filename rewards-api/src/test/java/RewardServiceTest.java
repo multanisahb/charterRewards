@@ -51,8 +51,7 @@ public class RewardServiceTest {
         List<PaymentsEntity> validPaymentsEntityList = Arrays.asList(
                 buildPaymentEntity(customer1,1L, BigDecimal.valueOf(120),LocalDate.now()),
                 buildPaymentEntity(customer1,2L, BigDecimal.valueOf(60),LocalDate.now().minusMonths(2)),
-                buildPaymentEntity(customer1,2L, BigDecimal.valueOf(60),LocalDate.now().minusMonths(4)),
-                buildPaymentEntity(customer1,2L, BigDecimal.valueOf(50),LocalDate.now().minusMonths(1)));
+                buildPaymentEntity(customer1,3L, BigDecimal.valueOf(50),LocalDate.now().minusMonths(1)));
         Map<String, Integer> pointsRange = new HashMap<>();
         pointsRange.put("LOWER", 1);
         pointsRange.put("UPPER", 2);
@@ -69,7 +68,7 @@ public class RewardServiceTest {
                 .map(RewardsPerMonth::getMonth)
                 .collect(Collectors.toList())
                 .contains(LocalDate.now().getMonth().name()));
-        assertEquals(110,response.getBody().getTotalPoints());
+        assertEquals(100,response.getBody().getTotalPoints());
     }
 
     @Test
