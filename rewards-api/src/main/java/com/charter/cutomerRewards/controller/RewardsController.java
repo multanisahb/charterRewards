@@ -3,6 +3,8 @@ package com.charter.cutomerRewards.controller;
 import com.charter.cutomerRewards.dto.response.RewardsResponse;
 import com.charter.cutomerRewards.service.RewardsService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,7 +18,7 @@ public class RewardsController {
     private RewardsService rewardsService;
 
     @GetMapping(value = "/{customerId}")
-    private RewardsResponse getCustomerRewards(@PathVariable(value = "customerId", required = true) Long customerId) {
-        return RewardsResponse.builder().customerName(rewardsService.getCustomerName(customerId)).build();
+    private ResponseEntity<RewardsResponse> getCustomerRewards(@PathVariable(value = "customerId", required = true) Long customerId) {
+        return rewardsService.getCustomerRewards(customerId) ;
     }
 }

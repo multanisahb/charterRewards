@@ -18,5 +18,5 @@ VALUES (5,'2022-12-31','Charter Food',20.00,2);
 INSERT INTO payments(id, transaction_date, merchant_name, transaction_amount, customer_id)
 VALUES (6,'2023-12-25','Charter Food',49.50,2);
 INSERT INTO payments(id, transaction_date, merchant_name, transaction_amount, customer_id)
-VALUES (7,'2023-12-26','Charter Food',50.22,2);
+VALUES (7,'2023-12-26','Charter Food',50.90,2);
 

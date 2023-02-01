@@ -11,5 +11,5 @@ import java.util.List;
 public class RewardsResponse {
     private String customerName;
     private BigDecimal totalPoints;
-    private List<RewardsMonthlyBreakdown> pointsBreakdown;
+    private List<RewardsPerMonth> pointsBreakdown;
 }

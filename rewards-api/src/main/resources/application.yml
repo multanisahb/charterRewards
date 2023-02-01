@@ -6,3 +6,10 @@ spring:
     url: jdbc:postgresql://0.0.0.0:5439/charter
     username: admin
     password: admin
+
+rewards:
+  pointsRange:
+    LOWER: 1
+    UPPER: 2
+  lowerLimit: 50
+  upperLimit: 100
