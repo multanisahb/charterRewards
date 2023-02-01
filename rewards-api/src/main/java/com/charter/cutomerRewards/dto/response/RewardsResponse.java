@@ -10,6 +10,6 @@ import java.util.List;
 @Builder
 public class RewardsResponse {
     private String customerName;
-    private BigDecimal totalPoints;
+    private Integer totalPoints;
     private List<RewardsPerMonth> pointsBreakdown;
 }

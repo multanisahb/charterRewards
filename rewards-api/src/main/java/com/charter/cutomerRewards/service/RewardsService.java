@@ -49,6 +49,10 @@ public class RewardsService {
                             .map(customerEntity -> customerEntity.getFirstName().concat(" ").concat(customerEntity.getLastName()))
                             .orElse(null))
                     .pointsBreakdown(rewardsPerMonthList)
+                    .totalPoints(rewardsPerMonthList.stream()
+                            .map(RewardsPerMonth::getPointsEarned)
+                            .mapToInt(Integer::intValue)
+                            .sum())
                     .build(), HttpStatus.OK);
         }
         return new ResponseEntity<>(RewardsResponse.builder().build(), HttpStatus.NOT_FOUND);
@@ -71,5 +75,4 @@ public class RewardsService {
                 .sum();
         return valueBetweenLimits + valueAboveUpperLimit;
     }
-
 }
