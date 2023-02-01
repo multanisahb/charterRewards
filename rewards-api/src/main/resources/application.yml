@@ -1,0 +1,8 @@
+spring:
+  datasource:
+    hikari:
+      connection-timeout: 20000
+      maximum-pool-size: 5
+    url: jdbc:postgresql://0.0.0.0:5439/charter
+    username: admin
+    password: admin
