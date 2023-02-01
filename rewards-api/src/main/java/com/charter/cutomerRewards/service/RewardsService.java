@@ -46,7 +46,10 @@ public class RewardsService {
             }
             return new ResponseEntity<>(RewardsResponse.builder()
                     .customerName(customer
-                            .map(customerEntity -> customerEntity.getFirstName().concat(" ").concat(customerEntity.getLastName()))
+                            .map(customerEntity -> customerEntity.getFirstName()
+                                    .concat(Optional.ofNullable(customerEntity.getLastName())
+                                            .map(ln -> String.format(" %s",ln))
+                                            .orElse("")))
                             .orElse(null))
                     .pointsBreakdown(rewardsPerMonthList)
                     .totalPoints(rewardsPerMonthList.stream()

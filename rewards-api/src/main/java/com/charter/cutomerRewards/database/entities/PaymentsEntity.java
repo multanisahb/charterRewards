@@ -1,7 +1,6 @@
 package com.charter.cutomerRewards.database.entities;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -11,6 +10,9 @@ import java.time.LocalDate;
 @Setter
 @Entity
 @Table(name = "payments")
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class PaymentsEntity {
     @Id
     @Column(name = "id", nullable = false)
