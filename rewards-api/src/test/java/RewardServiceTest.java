@@ -38,22 +38,21 @@ public class RewardServiceTest {
     @InjectMocks
     RewardsService rewardsService;
 
-    List<PaymentsEntity> validPaymentsEntityList = new ArrayList<>();
-
+    CustomerEntity customer1 = new CustomerEntity();
     @BeforeEach
     void init() {
-        CustomerEntity customer1 = CustomerEntity.builder().firstName("Multani").id(1L).build();
-        validPaymentsEntityList = Arrays.asList(
-                buildPaymentEntity(customer1,1L, BigDecimal.valueOf(120),LocalDate.now()),
-                buildPaymentEntity(customer1,2L, BigDecimal.valueOf(60),LocalDate.now().minusMonths(2)),
-                buildPaymentEntity(customer1,2L, BigDecimal.valueOf(60),LocalDate.now().minusMonths(4)),
-                buildPaymentEntity(customer1,2L, BigDecimal.valueOf(50),LocalDate.now().minusMonths(1)));
+        customer1 = CustomerEntity.builder().firstName("Multani").id(1L).build();
         when(customerRepository.findCustomerEntityById(1L))
                 .thenReturn(Optional.ofNullable(customer1));
     }
 
     @Test
     void successScenario() {
+        List<PaymentsEntity> validPaymentsEntityList = Arrays.asList(
+                buildPaymentEntity(customer1,1L, BigDecimal.valueOf(120),LocalDate.now()),
+                buildPaymentEntity(customer1,2L, BigDecimal.valueOf(60),LocalDate.now().minusMonths(2)),
+                buildPaymentEntity(customer1,2L, BigDecimal.valueOf(60),LocalDate.now().minusMonths(4)),
+                buildPaymentEntity(customer1,2L, BigDecimal.valueOf(50),LocalDate.now().minusMonths(1)));
         Map<String, Integer> pointsRange = new HashMap<>();
         pointsRange.put("LOWER", 1);
         pointsRange.put("UPPER", 2);
@@ -91,9 +90,9 @@ public class RewardServiceTest {
         ResponseEntity<RewardsResponse> response = rewardsService.getCustomerRewards(1L);
         assertNotNull(response);
         assertEquals(HttpStatus.NOT_FOUND,response.getStatusCode());
-        assertEquals(null,response.getBody().getCustomerName());
-        assertEquals(null,response.getBody().getTotalPoints());
-        assertEquals(null,response.getBody().getPointsBreakdown());
+        assertNull(response.getBody().getCustomerName());
+        assertNull(response.getBody().getTotalPoints());
+        assertNull(response.getBody().getPointsBreakdown());
     }
 
     PaymentsEntity buildPaymentEntity(CustomerEntity customer, long paymentId ,BigDecimal transactionAmount, LocalDate transactionDate) {
