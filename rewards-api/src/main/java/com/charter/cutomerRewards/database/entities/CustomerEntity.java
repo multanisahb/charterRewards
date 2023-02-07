@@ -4,6 +4,10 @@ import lombok.*;
 
 import javax.persistence.*;
 
+/**
+ * This entity contains info for customer object
+ * @author Multani
+ */
 @Getter
 @Setter
 @Entity

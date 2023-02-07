@@ -18,15 +18,27 @@ import java.time.Month;
 import java.util.*;
 import java.util.stream.Collectors;
 
+/**
+ * Rewards Service: Validates and calculates rewards point breakdown for a customer.
+ * @author Multani
+ */
 @Service
 public class RewardsService {
-    @Autowired
     private CustomerRepository customerRepository;
-    @Autowired
     PaymentsRepository paymentsRepository;
-    @Autowired
     RewardPointsRangeConfiguration rewardsConfig;
 
+    public RewardsService(CustomerRepository customerRepository, PaymentsRepository paymentsRepository, RewardPointsRangeConfiguration rewardsConfig) {
+        this.customerRepository = customerRepository;
+        this.paymentsRepository = paymentsRepository;
+        this.rewardsConfig = rewardsConfig;
+    }
+
+    /**
+     * <p> Returns rewards break down earned by customer over last 3 months</p>
+     * @param customerId : unique Id for the customer
+     * @return rewards breakdown of the customer
+     */
     public ResponseEntity<RewardsResponse> getCustomerRewards(long customerId) {
         Optional<CustomerEntity> customer = customerRepository.findCustomerEntityById(customerId);
         if (customer.isPresent()) {
@@ -61,6 +73,11 @@ public class RewardsService {
         return new ResponseEntity<>(RewardsResponse.builder().build(), HttpStatus.NOT_FOUND);
     }
 
+    /**
+     * <p> Calculates reward earned per month</p>
+     * @param transactionAmounts : list of transaction amounts
+     * @return aggregated reward points earned by customer over the month.
+     */
     public Integer calculateRewardsPerMonth(List<BigDecimal> transactionAmounts) {
         Integer valueBetweenLimits = transactionAmounts.stream()
                 .filter(amount -> Math.round(amount.floatValue()) > rewardsConfig.getLowerLimit()

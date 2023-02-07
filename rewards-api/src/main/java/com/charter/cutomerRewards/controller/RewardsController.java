@@ -9,6 +9,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * Rewards Controller: Exposes GET endpoint to fetch customer rewards breakdown based on unique customer Id.
+ * @author Multani
+ */
 @RestController
 @RequestMapping(value = "/charter/rewards")
 public class RewardsController {
